@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body style="background-image: url('robot.jpeg');">
+    <div class="container">
+        <div class="merge"><img src="logologo.png" alt="">
+        <h1>&nbsp;&nbsp;&nbsp;Tech Skill Vocational Institute</h1></div>
+        <h1>Artificial Intelligence</h1>
+        <h1>Final Test</h1>
+        <label for="studentName">Student Name:</label>
+        <input type="text" id="studentName" name="studentName"><br><br>
+        <div id="quiz-container"></div>
+        <button onclick="checkAnswers()">Submit</button>
+    </div>
+    <script class="container">
+        const questions = [
+            //question 1
+    {
+        question: "A company employs a team of customer service agents to provide telephone and email support to customers.The company develops a webchat bot to provide automated answers to common customer queries.Which business benefit should the company expect as a result of creating the webchat bot solution?",
+        options: ["increased sales", "a reduced workload for the customer service agents",  "improved product reliability"],
+        correct: ["a reduced workload for the customer service agents"]
+    },
+     //question 2
+    {
+        question: "You need to ensure that the model meets the Microsoft transparency principle for responsible AI.What should you do?",
+        options: ["Set Validation type to Auto", "Enable Explain best model",  "Set Primary metric to accuracy"],
+        correct: ["Enable Explain best model"]
+    },
+     //question 3
+    {
+        question: "Forecasting housing prices based on historical data is an example of Anomaly detection?",
+        options: ["Yes", "No",  ],
+        correct: ["No"]
+    },
+     //question 4
+    {
+        question: "What are three Microsoft guiding principles for responsible AI? Each correct answer presents a complete solution?",
+        options: ["knowledgeability", "inclusiveness", "fairness", "opinionatedness", "reliability and safety"],
+        correct: ["inclusiveness", "fairness", "reliability and safety"], // Multiple correct answers
+        type: "checkbox"
+    },
+     //question 5
+    {
+        question: "You are designing an AI system that empowers everyone, including people who have hearing, visual, and other impairments. This is an example of which Microsoft guiding principle for responsible AI?",
+        options: ["fairness", "inclusiveness", "reliability and safety" ],
+        correct: ["inclusiveness"]
+    },
+     //question 6
+    {
+        question: "calculate the TP & FN",
+        image: "classification.jpg", // Replace with actual image URL
+        options: ["11 & 5", "11 & 1033", "13951 & 5", "5 & 1033"],
+        correct: ["11 & 5"],
+        type: "image"
+    },
+     //question 7
+     {
+        question: "Predicting next month toy sales using ?",
+        options: ["Clustering", "Regression", "Classification" ],
+        correct: ["Regression"]
+    },
+      //question 8
+      {
+        question: "------is used to generate additional features?",
+        options: ["Feature Selection", "Feature Engineering", "Model Evaluation" ],
+        correct: ["Feature Engineering"]
+    },
+       //question 9
+     { question: "You run a charity event that involves posting photos of people wearing sunglasses on Twitter." +
+"You need to ensure that you only retweet photos that meet the following requirements:" +
+" ✑ Include one or more faces."+
+" ✑ Contain at least one person wearing sunglasses." +
+" What should you use to analyze the images?", 
+     options: ["the Verify operation in the Face service", "the Detect operation in the Face service",  "the Describe Image operation in the Computer Vision service"], 
+     correct: ["the Detect operation in the Face service"], 
+    },
+     //question 10
+     {
+        question: "Personal must be visible only to prove belongs to :",
+        options: ["Reliability & safety", "Privacy & security", "Transparency" ],
+        correct: ["Privacy & security"]
+    },
+     //question 11
+     {
+        question: "An automated chatbot to answer question about refunds & exchanges",
+        options: ["Conversational language understanding", "Natural language processing", "Computer vision" ],
+        correct: ["Conversational language understanding"]
+    },
+    //question 12
+    {
+        question: "You have a dataset that contains information about taxi journeys that occurred during a given period." +
+"You need to train a model to predict the fare of a taxi journey.What should you use as a feature?",
+        options: ["the trip ID of individual taxi journeys", "the number of taxi journeys in the dataset", "the trip distance of individual taxi journeys" ],
+        correct: ["the trip distance of individual taxi journeys"]
+    },
+     //question 13
+     {
+        question: "You should evaluate the model by using same data used to train the model.",
+        options: ["NO" , "Yes"],
+        correct: ["NO"]
+    },
+       //question 14
+       {
+        question: "Which service should you use to extract text, key/value pairs, and table data automatically from scanned" + 
+" documents?",
+        options: ["Form Recognizer" , "Text Analytics"],
+        correct: ["Form Recognizer"]
+    },
+     //question 15
+     {
+        question:"You need to use machine learning to support early detection of the different brain haemorrhage types in the" +
+" images before the images are reviewed by a person."+
+" This is an example of which type of machine learning?",
+        options: ["regression" ,"classification" , "Clustering"],
+        correct: ["classification"]
+    },
+     //question 16
+     {
+        question: "You use Azure Machine Learning designer to publish an inference pipeline."+
+" Which two parameters should you use to access the web service? Each correct answer presents part of the"+
+" solution.",
+        options: ["the model name", "the authentication key", "the training endpoint",  "the REST endpoint"],
+        correct: ["the authentication key", "the REST endpoint"], // Multiple correct answers
+        type: "checkbox"
+    },
+    //question 17
+    {
+        question: "House price category is a ",
+        image: "label.jpg", // Replace with actual image URL
+        options: ["Feature" , "Label"],
+        correct: ["Label"],
+        type: "image"
+    },
+    //question 18
+    {
+        question: "For machine learning progress how should you split data for training and evaluation?",
+        options: ["Randomly split the data into columns for training and columns for evaluation" , "Randomly split the data into rows for training and row for evaluation"],
+        correct: ["Randomly split the data into rows for training and row for evaluation"]
+    },
+
+//question 19
+{
+       question: "A validation set include the set of input example that will be used to train the model",
+        options: ["Yes" , "No"],
+        correct: ["No"]
+    },
+    // question # 20
+    {
+        question:"What are two metrics that you can use to evaluate a regression model? Each correct answer presents a complete" +
+"  solution",
+        options: ["coefficient of determination (R2)", "F1 score", "root mean squared error (RMSE",  "area under curve (AUC)"],
+        correct: ["coefficient of determination (R2)", "root mean squared error (RMSE"], // Multiple correct answers
+        type: "checkbox"
+    },
+   //question # 21
+   {
+       question: "Which metric can you use to evaluate a classification model?",
+        options: ["true positive rate" , "mean absolute error (MAE)" , "root mean squared error (RMSE)"],
+        correct: ["true positive rate"]
+    },
+    //question # 22
+    {
+       question: "Assign classes to images before training a classification model is an example of------",
+        options: ["Evaluation" , "Feature engineering" , "Labelling"],
+        correct: ["Labelling"]
+    },
+    //question # 23
+    {
+        question:"Which two languages can you use to write custom code for Azure Machine Learning designer? Each correct"+
+" answer presents a complete solution.",
+        options: ["R", "Python",  "C#"],
+        correct: ["Python", "R"], // Multiple correct answers
+        type: "checkbox"
+    },
+    //QUESTION # 24
+    {
+       question: "For clustering model label must be used.",
+        options: ["Yes" , "No"],
+        correct: ["No"]
+    },
+    //question # 25
+    {
+       question: "You are processing photos of runners in a race."+
+" You need to read the numbers on the runners' shirts to identity the runners in the photos.",
+        options: ["facial recognition" , "optical character recognition (OCR)"],
+        correct: ["optical character recognition (OCR)"]
+    },
+    //question # 26
+    {
+       question: "Separate image of polar bear and brown bear. this statement belongs to:",
+        options: ["Image classification" , "Image Analysis", "object detection"],
+        correct: ["Image classification"]
+    },
+    //question # 27
+     
+     {
+       question: "Do Two images of face belong to same person?",
+        options: ["Verfication" , "Similarity", "Identification"],
+        correct: ["Verfication"]
+    },
+    //question # 28
+    {
+        question:"Which Two task perform by using computer vision?",
+        options: ["Translate the text in an image between languages", 
+        "Detect faces in an image", 
+         "Recognize handwritten text"
+        ],
+        correct: ["Recognize handwritten text", "Detect faces in an image"], // Multiple correct answers
+        type: "checkbox"
+    },
+
+    //question # 29
+    {
+       question: "You can use the ----- service to train an object detection model by using your own images",
+        options: ["Computer Vision" , "Custom Vision", "Video indexer"],
+        correct: ["Custom Vision"]
+    },
+    //question # 30
+    {
+       question: "Which Computer Vision feature can you use to generate automatic captions for digital photographs?",
+        options: ["Recognize text." , "Identify the areas of interest.", "Describe the images"],
+        correct: ["Describe the images"]
+    },
+    //question # 31
+    {
+       question: "You are developing a solution that uses the Text Analytics service."+
+" You need to identify the main talking points in a collection of documents."+
+" Which type of natural language processing should you use?",
+        options: ["entity recognition" , "language detection", "key phrase extraction"],
+        correct: ["key phrase extraction"]
+    },
+    //question # 32
+    {
+        question:"Which Two task perform by using speech recognition?",
+        options: ["providing closed captions for recorded or live videos", 
+        "creating an automated public address system for a train station", 
+         "creating a transcript of a telephone call or meeting"
+        ],
+        correct: ["creating a transcript of a telephone call or meeting", "providing closed captions for recorded or live videos"], // Multiple correct answers
+        type: "checkbox"
+    },
+    //question # 33
+    {
+       question: "You plan to develop a bot that will enable users to query a knowledge base by using natural language processing."+
+" Which two services should you include in the solution?",
+        options: ["QnA Maker" , "Form Recognizer", "Anomaly Detector"],
+        correct: ["QnA Maker"]
+    },
+    //question # 34
+    {
+       question: "Which AI service can you use to interpret the meaning of a user input such as `Call me back later?",
+        options: ["Translator" , "Language Understanding (LUIS)", "Speech"],
+        correct: ["Language Understanding (LUIS)"]
+    },
+    //question # 35
+    {
+       question: "Monitoring public news sites for negative mention of a product is an example of natural language processing?",
+        options: ["No" , "Yes"],
+        correct: ["Yes"]
+    },
+     //question # 36
+     {
+       question:"When building a regression model the label must have data type of",
+        options: ["Boolean" , "DateTime","Numeric"],
+        correct: ["Numeric"]
+    },
+    //question # 37
+    {
+       question: "Which two services provided by speech?",
+        options: ["Text to Speech" , "Text to Text", "Speech to Text"],
+        correct: ["Text to Speech", "Speech to Text"],
+         type: "checkbox"
+    },
+    //question # 38
+    {
+       question: "Which service provide spoken response to user----?",
+        options: ["Text Analytics" , "Speech", "Translator Text"],
+        correct: ["Speech"]
+    },
+    //QUESTION # 39
+
+    {
+       question: "You are developing a conversational AI solution that will communicate with users through multiple channels"+
+" including email, Microsoft Teams, and webchat.",
+        options: ["Text Analytics" , "Azure Bot Service", "Form Recognizer"],
+        correct: ["Azure Bot Service"]
+    },
+    //QUESTION # 40
+    {
+       question: "You need to reduce the load on telephone operators by implementing a chatbot to answer simple questions with"+
+"  predefined answers." +
+"  Which two AI service should you use to achieve the goal?",
+        options: ["Text Analytics" , "QnA Maker", "Azure Bot Service" , "Translator"],
+        correct: ["Azure Bot Service" , "QnA Maker"],
+        type: "checkbox"
+    },
+    //question # 41
+    {
+       question: "You have an Azure Machine Learning pipeline that contains a Split Data module."+
+" The Split Data module outputs to a Train Model module and a Score Model module."+
+" What is the function of the Split Data module?",
+        options: ["scaling numeric variables so that they are within a consistent numeric range" , "creating training and validation datasets", "diverting records that have missing data"],
+        correct: ["creating training and validation datasets"]
+    },
+    //question # 42
+    {
+       question: "Evaluates Text along positive or negative scale belongs to-----?",
+        options: ["Sentiment Analysis" , "Entity Recognition", "Key Phrase Extraction"],
+        correct: ["Sentiment Analysis"]
+    },
+    //question # 43
+    {
+       question: "You have a natural language processing (NLP) model that was created by using data obtained without permission.Which Microsoft principle for responsible AI does this breach?",
+        options: ["reliability and safety" , "privacy and security", "transparency"],
+        correct: ["transparency"]
+    },
+    //question # 44
+    {
+       question: "You have an AI-based loan approval system."+
+" During testing, you discover that the system has a gender bias."+
+" Which responsible Al principle does this violate?",
+        options: ["accountability" ,"fairness", "reliability and safety"],
+        correct: ["fairness"]
+    },
+    //question # 45
+    {
+       question:"You need to identify groups of rows with similar numeric values in a dataset."+
+" Which type of machine learning should you use?",
+        options: ["clustering" , "regression","classification"],
+        correct: ["clustering"]
+    },
+ //question # 46
+ {
+       question:"An app that analyzes social media posts to identify their tone is an example of which type of natural language"+
+" processing (NLP) workload?",
+        options: ["speech recognition" , "sentiment analysis","entity recognition"],
+        correct: ["sentiment analysis"]
+    },
+    //question # 47
+    {
+       question:"You have a website that includes customer reviews."+
+" You need to store the reviews in English and present the reviews to users in their respective language by"+
+" recognizing each user's geographical location."+
+" Which type of natural language processing workload should you use?",
+        options: ["Translation" , "language modeling","key phrase extraction"],
+        correct: ["Translation"]
+    },
+    //QUESTION # 48
+    {
+        question: "This picture show what type of computer vision technique?",
+        image: "ANALYSIS.jpg", // Replace with actual image URL
+        options: ["Image Classification" , "Image Analysis" , "OCR"],
+        correct: ["Image Analysis"],
+        type: "image"
+    },
+    //QUESTION # 49
+    {
+        question: "Chatgpt is an example of-------",
+     
+        options: ["NLP","Generative AI","Computer Vision"],
+        correct: ["Generative AI"],
+        
+    },
+    //question # 50
+    {
+        question: "When training a model, why should you randomly split the rows into separate subsets?",
+     
+        options: ["to train the model twice to attain better accuracy","to train multiple models simultaneously to attain better performance","to test the model by using data that was not used to train the model"],
+        correct: ["to test the model by using data that was not used to train the model"],
+        
+    },
+    // Add more questions here in the same format
+];
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        function displayQuestions(questions) {
+    const quizContainer = document.getElementById('quiz-container');
+    questions.forEach((questionObj, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.classList.add('question');
+
+        if (questionObj.type === "image") {
+            questionDiv.innerHTML = `<p>${index + 1}. ${questionObj.question}</p><img src="${questionObj.image}" alt="Question Image" style="max-width: 100%; height: auto;"><br>`;
+        } else {
+            questionDiv.innerHTML = `<p>${index + 1}. ${questionObj.question}</p>`;
+        }
+
+        questionObj.options.forEach(option => {
+            const optionLabel = document.createElement('label');
+            const inputType = questionObj.type === "checkbox" ? "checkbox" : "radio";
+            optionLabel.innerHTML = `
+                <input type="${inputType}" name="question${index}" value="${option}">
+                ${option}
+            `;
+            questionDiv.appendChild(optionLabel);
+            questionDiv.appendChild(document.createElement('br'));
+        });
+        quizContainer.appendChild(questionDiv);
+    });
+}
+
+
+        const shuffledQuestions = shuffle(questions);
+        displayQuestions(shuffledQuestions);
+
+        function checkAnswers() {
+    let score = 0;
+    const studentName = document.getElementById("studentName").value;
+
+    questions.forEach((questionObj, index) => {
+        const selectedOptions = [...document.querySelectorAll(`input[name="question${index}"]:checked`)].map(input => input.value);
+
+        if (questionObj.type === "checkbox") {
+            const correctSelected = questionObj.correct.filter(option => selectedOptions.includes(option)).length;
+            if (correctSelected === questionObj.correct.length) {
+                score += 6; // Full score if all correct answers are selected
+            } else if (correctSelected > 0) {
+                score += 3; // Partial score if some correct answers are selected
+            }
+        } else {
+            const selectedOption = selectedOptions[0];
+            if (selectedOption && selectedOption === questionObj.correct[0]) {
+                score += 6; // Adjust score as needed
+            }
+        }
+    });
+
+    const resultPage = `result.html?name=${encodeURIComponent(studentName)}&marks=${encodeURIComponent(score)}`;
+    window.location.href = resultPage;
+}
+
+    </script>
+</body>
+</html>
